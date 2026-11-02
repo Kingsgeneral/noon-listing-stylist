@@ -1,0 +1,93 @@
+# 海湾市场（AE / SA / EG）审美预设库
+# 用途：场景图生成的提示词母本 + 视觉基线的人工先验
+# 说明：这里是"专家先验"，需在 P4 阶段用 Noon 爆款店铺真实图片统计校准
+
+version: 0.1.0
+reviewed_at: "2026-11-02"
+
+palettes:
+  royal_gold:
+    description: 深金 + 深蓝点缀，奢华感，适合美妆/香水/珠宝/礼盒
+    colors: ["#0B1B33", "#C9A227", "#F2E8D5", "#1F3A5F"]
+    lighting: warm_soft_key
+    avoid: ["过度高饱和金色导致廉价感", "大面积纯黑背景"]
+  desert_neutral:
+    description: 沙色/赤陶/米白，自然质朴，适合家居/香氛/织物
+    colors: ["#D9C7A7", "#A9714B", "#F5F0E6", "#7A6A56"]
+    lighting: natural_window_light
+    avoid: ["灰绿色调（易联想到陈旧）"]
+  modern_marble:
+    description: 白灰大理石 + 柔和阴影，现代感，适合电子/厨具/护肤
+    colors: ["#F7F7F5", "#DCDAD5", "#9AA0A6", "#2B2B2B"]
+    lighting: clean_studio_soft
+    avoid: ["冷蓝过重"]
+  ramadan_night:
+    description: 深靛蓝 + 灯笼暖光 + 金色新月纹样，节庆限定
+    colors: ["#101C3A", "#D4A537", "#7A1F2B", "#F3E3C3"]
+    lighting: low_key_warm_pool
+    avoid: ["宗教场所写实复刻", "人物饮酒元素"]
+  eid_festive:
+    description: 奶油白 + 柔和金 + 花卉，节庆送礼场景
+    colors: ["#FBF6EC", "#D8B26A", "#C97B84", "#8FA98A"]
+    lighting: bright_airy
+    avoid: ["过度堆砌装饰导致主体被淹没"]
+
+scenes:
+  majlis_living:
+    label_zh: 阿拉伯会客厅
+    prompt: "elegant Gulf majlis living room, low seating with patterned cushions, brass side table, warm afternoon light through mashrabiya screen"
+    best_for: [home, fragrance, tea_coffee, textile]
+    product_placement: on low table, eye level
+  modern_apartment_dubai:
+    label_zh: 迪拜现代公寓
+    prompt: "modern Dubai apartment interior, floor-to-ceiling window with soft city daylight, minimal beige and wood surfaces"
+    best_for: [electronics, kitchen, skincare, fitness]
+    product_placement: on clean counter or shelf, 45-degree angle
+  desert_dune_golden_hour:
+    label_zh: 沙漠黄昏
+    prompt: "soft golden-hour desert dunes, warm sand texture, long soft shadows, no people"
+    best_for: [outdoor, travel, fragrance, leather]
+    product_placement: resting on sand, low camera angle
+  souk_market:
+    label_zh: 传统市集
+    prompt: "traditional Gulf souk stall, spice sacks and brass lanterns softly out of focus, warm ambient light"
+    best_for: [spices, coffee, textile, handicraft]
+    product_placement: foreground sharp, background bokeh
+  marble_bathroom:
+    label_zh: 大理石浴室
+    prompt: "clean marble bathroom counter, soft diffused daylight, folded white towel, minimal styling"
+    best_for: [beauty, personal_care, haircare]
+    product_placement: counter center, slight top-down
+  studio_white_soft:
+    label_zh: 纯白棚拍
+    prompt: "seamless pure white studio background, soft key light from upper left, subtle contact shadow"
+    best_for: [all]
+    product_placement: centered, product fills 70-80 percent of frame
+
+seasonal_windows:
+  ramadan:
+    period: "伊斯兰历九月"
+    visual_cues: [灯笼, 新月纹样, 深靛蓝, 开斋餐桌]
+    copy_angle: 团聚 / 馈赠 / 夜间时光
+  eid_al_fitr:
+    period: "闪瓦鲁月首日"
+    visual_cues: [奶油白, 花卉, 礼盒丝带, 家庭合影感]
+    copy_angle: 送礼 / 焕新 / 庆祝
+  eid_al_adha:
+    period: "都尔黑哲月十日"
+    visual_cues: [大地色, 织物纹理, 简约庄重]
+    copy_angle: 分享 / 待客 / 品质
+  dsfl:
+    label_zh: 迪拜购物节
+    period: "12 月至次年 1 月"
+    visual_cues: [节庆灯饰, 现代都市夜景, 高对比]
+    copy_angle: 折扣季囤货（注意：主图不得出现促销角标）
+
+composition_priors:
+  # 来自人工观察的先验，P4 阶段用真实爆款数据校准
+  product_area_ratio: [0.6, 0.8]
+  headroom_ratio: 0.12
+  shadow: "soft contact shadow preferred, hard shadow avoided"
+  color_temp: "5000-6000K, slight warmth acceptable"
+  text_on_secondary_max_lines: 3
+  human_presence: "optional; if present prefer hands or partial figure over full face"

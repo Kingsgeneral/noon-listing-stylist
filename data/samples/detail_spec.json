@@ -1,0 +1,12 @@
+{
+  "title_ar": "قهوة عربية أصيلة",
+  "title_en": "Authentic Arabic Coffee",
+  "product_image": "data/samples/demo_product.png",
+  "palette": "royal_gold",
+  "bullets": [
+    {"ar": "تحميص متوسط بنكهة الهيل", "en": "Medium roast with cardamom"},
+    {"ar": "عبوة محكمة 500 جرام", "en": "500 g resealable pack"},
+    {"ar": "توصيل سريع داخل الإمارات", "en": "Fast delivery across UAE"}
+  ],
+  "badge": "AED 39 · Free delivery over AED 100"
+}

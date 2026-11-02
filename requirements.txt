@@ -1,0 +1,7 @@
+Pillow>=10.0
+numpy>=1.26
+PyYAML>=6.0
+requests>=2.31
+arabic-reshaper>=3.0
+python-bidi>=0.4.2
+pytest>=8.0

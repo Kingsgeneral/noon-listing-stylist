@@ -1,0 +1,82 @@
+# Noon 平台商品图规范（可断言规则）
+# 用途：生成后自动校验，判断素材能否上架
+# 注意：verified=false 的字段需上架前对照 Noon Seller Lab 最新文档二次核对
+
+version: 0.1.0
+reviewed_at: "2026-11-02"
+markets: [AE, SA, EG]
+
+main_image:
+  verified: false
+  background:
+    type: pure_white
+    min_channel_value: 248        # RGB 三通道 >= 此值视为白底
+    background_white_ratio_min: 0.92   # 商品以外区域中近白像素占比下限（不含商品本体）
+    allow_soft_shadow: true       # 允许浅投影，但不得出现色块背景
+  size:
+    min_side_px: 1000
+    recommended_side_px: 1500
+    max_file_mb: 10
+    allowed_formats: [jpg, jpeg, png]
+  shape:
+    aspect_ratio: "1:1"
+    tolerance: 0.02
+  composition:
+    product_bbox_ratio_min: 0.55  # 商品外接框面积 / 画面面积，低于此值主体偏小
+    product_bbox_ratio_max: 0.95
+    centered_tolerance: 0.08      # 商品中心偏离画面中心的容忍比例
+    margin_min_ratio: 0.03        # 商品到画面边缘的最小留白
+  forbidden:
+    - watermarks
+    - promotional_text            # 促销文案、折扣角标
+    - price_tags
+    - borders_or_frames
+    - collages                    # 多图拼接
+    - qr_codes
+    - phone_numbers
+    - brand_logos_of_third_party
+    - countdown_badges
+
+secondary_images:
+  verified: false
+  max_count: 8
+  allowed_content:
+    - lifestyle_scene             # 使用场景
+    - scale_reference             # 尺寸参照
+    - detail_closeup              # 材质细节
+    - packaging                   # 包装内容
+    - infographic                 # 图文卖点
+  text_ratio_max: 0.25            # 文字覆盖面积上限
+  forbidden_same_as_main: true
+
+detail_page:
+  verified: false
+  width_px: 1200
+  max_height_px: 6000
+  language_order: [ar, en]        # 阿语优先，英语辅助
+  text_direction: rtl
+  min_contrast_ratio: 4.5
+  section_order:
+    - hero_claim                  # 主视觉 + 核心主张
+    - key_benefits                # 3-5 条卖点
+    - material_or_spec            # 材质/参数
+    - usage_steps                 # 使用方式
+    - trust_badges                # 认证/质保/配送
+
+category_expectations:
+  fashion:
+    needs_model_shot: true
+    model_dress_modesty: high     # 海湾市场着装尺度要求高
+    background_preference: warm_neutral
+  beauty:
+    needs_texture_closeup: true
+    before_after_allowed: false   # 需功效证明文件方可使用
+  electronics:
+    needs_port_detail: true
+    needs_box_contents: true
+  home:
+    needs_room_context: true
+    preferred_scene: majlis_living
+  grocery:
+    needs_expiry_visibility: true
+    needs_halal_badge: true

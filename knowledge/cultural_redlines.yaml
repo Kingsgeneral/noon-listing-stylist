@@ -1,0 +1,70 @@
+# 文化红线清单（海湾市场 AE / SA / EG）
+# 用途：生成前提示词约束 + 生成后视觉审查清单
+# 严重级别：block = 不能上架，review = 需人工复核，warn = 尽量避免
+
+version: 0.1.0
+reviewed_at: "2026-11-02"
+
+hard_blocks:
+  - id: alcohol
+    label_zh: 酒精饮品及酒具
+    keywords: [wine, beer, champagne, cocktail, alcohol, whiskey, bar counter]
+    action: 任何含酒精饮品、酒杯、酒吧场景一律不用
+  - id: pork
+    label_zh: 猪肉及其制品
+    keywords: [pork, bacon, ham, lard, gelatin_from_pork]
+    action: 食品类须确认不含猪肉成分，画面不得出现猪的形象
+  - id: religious_symbols
+    label_zh: 宗教符号与场所
+    keywords: [mosque_interior, quran_on_floor, prayer_mat_as_prop, allah_calligraphy]
+    action: 不得将宗教符号作为装饰道具；古兰经、礼拜毯不得作为摆件出镜
+  - id: immodest_dress
+    label_zh: 着装尺度
+    keywords: [bikini, lingerie_visible, deep_cleavage, bare_midriff]
+    action: 服装类模特图须覆盖肩部与膝盖，内衣类只用平铺/产品图
+  - id: gestures
+    label_zh: 手势与肢体
+    keywords: [left_hand_offering, thumbs_down, pointing_finger, sole_of_foot]
+    action: 避免左手递物、脚底朝向镜头、单指指点
+  - id: gambling
+    label_zh: 博彩元素
+    keywords: [casino, poker_chips, lottery, roulette]
+    action: 画面不得出现博彩道具
+  - id: israel_symbols
+    label_zh: 涉敏感政治符号
+    keywords: [six_pointed_star, specific_flags]
+    action: 严格避免任何涉政治、涉领土争议的符号与地图
+
+review_flags:
+  - id: before_after
+    label_zh: 功效前后对比
+    note: 美妆/护肤/保健类需具备功效证明文件，否则易被下架
+  - id: health_claims
+    label_zh: 医疗功效宣称
+    note: 治疗、治愈、杀菌率等表述需资质，阿语译文同样受限
+  - id: price_and_discount
+    label_zh: 图片内价格/折扣
+    note: 主图禁止；副图若有需与实际挂牌价一致，避免过期信息
+  - id: model_age
+    label_zh: 模特年龄观感
+    note: 避免未成年人观感的模特用于成人品类
+  - id: cultural_appropriation
+    label_zh: 传统服饰误用
+    note: 使用 kandura / abaya 元素需符合穿着语境，避免戏谑化
+
+language_rules:
+  primary: ar
+  secondary: en
+  arabic_typography:
+    direction: rtl
+    preferred_fonts: [Noto Kufi Arabic, Noto Naskh Arabic, Cairo, Tajawal]
+    avoid: [自动拉伸变形, 手工拆字, AI 直接生成的阿语字形]
+    note: 阿语连写特性决定了必须用真实字体渲染，不能靠图像模型画字
+  numbers_and_units:
+    currency: [AED, SAR, EGP]
+    size_units: [cm, inch, ml, g, kg]
+    note: 阿语文本中数字仍用阿拉伯数字（0-9），不要用东阿拉伯数字除非品牌规范要求
+  copy_tone:
+    - 直接说明利益点，避免过度夸张形容词
+    - 家庭与待客场景接受度高
+    - 避免绝对化用语（最好/第一/100%）

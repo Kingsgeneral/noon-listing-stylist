@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+*.log
+out/
+build/
+dist/
+*.egg-info/
+
+# 真实卖家素材与竞品采集数据不入库
+data/private/
+data/crawl/
